@@ -3,256 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoalPro - التطبيق الرياضي الاحترافي</title>
+  <title>GoalPro - التطبيق الرياضي المتكامل</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0b0e14;
-      --card-bg: rgba(22, 27, 34, 0.85);
-      --accent: #ff6a00;
-      --accent-glow: rgba(255, 106, 0, 0.4);
-      --text: #f0f6fc;
-      --dim: #8b949e;
-      --border: rgba(255, 255, 255, 0.1);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    /* شريط التنقل */
-    nav {
-      width: 100%;
-      max-width: 900px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px;
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .logo-container { display: flex; align-items: center; gap: 10px; }
-    .logo-img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 2px solid var(--accent); }
-    .logo-text { font-size: 20px; font-weight: 900; color: var(--accent); }
-    .nav-tabs { display: flex; gap: 8px; }
-    .tab-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: inherit;
-      font-weight: 700;
-      transition: 0.3s;
-    }
-    .tab-btn.active, .tab-btn:hover { background: var(--accent); border-color: var(--accent); }
-    .container { width: 100%; max-width: 900px; padding: 16px; flex: 1; }
-    /* الصفحات */
-    .page { display: none; }
-    .page.active { display: block; }
-    /* 1. واجهة تسجيل الدخول خلفية ملعب 4K */
-    .login-wrapper {
-      min-height: 75vh;
-      background: linear-gradient(rgba(11, 14, 20, 0.75), rgba(11, 14, 20, 0.9)), 
-                  url('https://images.unsplash.com/photo-1508098682722...') center/cover no-repeat;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      border: 1px solid var(--border);
-    }
-    .login-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      padding: 32px;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    }
-    .login-card input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: #fff;
-      font-family: inherit;
-    }
-    .btn-submit {
-      width: 100%;
-      padding: 12px;
-      background: var(--accent);
-      border: none;
-      color: #fff;
-      font-weight: 700;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    /* 2. صفحة المباريات */
-    .section-title { margin-bottom: 16px; font-size: 18px; color: var(--accent); }
-    .match-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .team { display: flex; align-items: center; gap: 10px; flex: 1; }
-    .team.right { justify-content: flex-end; }
-    .team-flag { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); }
-    .match-vs { text-align: center; font-weight: 900; color: var(--accent); padding: 0 10px; }
-    /* 3. صفحة البروفايل عبر ربط صورة لاعب */
-    .profile-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .profile-banner {
-      height: 180px;
-      background: url('https://images.unsplash.com/photo-1574629810360...') center/cover no-repeat;
-    }
-    .profile-info { padding: 20px; position: relative; text-align: center; }
-    .profile-avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--accent);
-      margin-top: -75px;
-      background: var(--bg);
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .stat-box {
-      background: rgba(0,0,0,0.3);
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <div class="logo-container">
-      <img src="https://images.unsplash.com/photo-1614632537190..." class="logo-img" alt="شعار GoalPro">
-      <span class="logo-text">GoalPro</span>
-    </div>
-    <div class="nav-tabs">
-      <button class="tab-btn active" onclick="showPage('login', this)">الدخول</button>
-      <button class="tab-btn" onclick="showPage('matches', this)">المباريات</button>
-      <button class="tab-btn" onclick="showPage('profile', this)">البروفايل</button>
-    </div>
-  </nav>
-  <div class="container">
-    <!-- واجهة تسجيل الدخول -->
-    <div id="login" class="page active">
-      <div class="login-wrapper">
-        <div class="login-card">
-          <h2 style="margin-bottom: 8px;">مرحباً بك في GoalPro</h2>
-          <p style="color: var(--dim); font-size: 13px; margin-bottom: 20px;">منصتك التكتيكية والرياضية الأولى</p>
-          <input type="text" placeholder="اسم المستخدم / البريد الإلكتروني">
-          <input type="password" placeholder="كلمة المرور">
-          <button class="btn-submit" onclick="showPage('matches', document.querySelectorAll('.tab-btn')[1])">تسجيل الدخول</button>
-        </div>
-      </div>
-    </div>
-    <!-- صفحة المباريات -->
-    <div id="matches" class="page">
-      <h3 class="section-title">⚽ مباريات اليوم المباشرة</h3>
-      <div class="match-card">
-        <div class="team">
-          <img src="https://images.unsplash.com/photo-1522778119026..." class="team-flag" alt="فريق 1">
-          <span>ريال مدريد</span>
-        </div>
-        <div class="match-vs">2 - 1<br><span style="font-size: 10px; color: var(--dim);">شوط 2</span></div>
-        <div class="team right">
-          <span>برشلونة</span>
-          <img src="https://images.unsplash.com/photo-1508098682722..." class="team-flag" alt="فريق 2">
-        </div>
-      </div>
-      <div class="match-card">
-        <div class="team">
-          <img src="https://images.unsplash.com/photo-1577223625816..." class="team-flag" alt="فريق 3">
-          <span>مانشستر سيتي</span>
-        </div>
-        <div class="match-vs">21:00<br><span style="font-size: 10px; color: var(--dim);">قادمة</span></div>
-        <div class="team right">
-          <span>ليفربول</span>
-          <img src="https://images.unsplash.com/photo-1518091043644..." class="team-flag" alt="فريق 4">
-        </div>
-      </div>
-    </div>
-    <!-- صفحة البروفايل -->
-    <div id="profile" class="page">
-      <div class="profile-card">
-        <div class="profile-banner"></div>
-        <div class="profile-info">
-          <!-- صورة لاعب كرة قدم احترافية -->
-          <img src="https://images.unsplash.com/photo-1511886929837..." class="profile-avatar" alt="صورة اللاعب">
-          <h2 style="margin-top: 10px;">أحمد التكتيكي</h2>
-          <p style="color: var(--accent); font-size: 13px;">محلل رياضي معتمد VIP</p>
-          <div class="stats-grid">
-            <div class="stat-box">
-              <strong style="color: var(--accent); font-size: 18px;">245</strong>
-              <div style="font-size: 11px; color: var(--dim);">توقع ناجح</div>
-            </div>
-            <div class="stat-box">
-              <strong style="color: var(--accent); font-size: 18px;">89%</strong>
-              <div style="font-size: 11px; color: var(--dim);">دقة التحليل</div>
-            </div>
-            <div class="stat-box">
-              <strong style="color: var(--accent); font-size: 18px;">12k</strong>
-              <div style="font-size: 11px; color: var(--dim);">متابع</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script>
-    function showPage(pageId, btn) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
-      if(btn) btn.classList.add('active');
-    }
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoalPro - التطبيق الرياضي الاحترافي</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- مكتبة توليد الـ QR الرسمية -->
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <!-- مكتبة إعلانات جوجل كمثال للربط البرمجي -->
-  <script async src="https://pagead2.googlesyndication.com/.../adsbygoogle.js..." crossorigin="anonymous"></script>
+  <!-- سكربت الإعلانات البرمجية -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
   <style>
     :root {
       --bg: #0b0e14;
@@ -265,7 +21,9 @@
       --tron: #eb0029;
       --trust: #0500ff;
       --success: #00e676;
+      --gold: #ffd700;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Tajawal', sans-serif;
@@ -276,9 +34,11 @@
       flex-direction: column;
       align-items: center;
     }
+
+    /* شريط التنقل العلوي */
     nav {
       width: 100%;
-      max-width: 900px;
+      max-width: 1100px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -290,25 +50,31 @@
       top: 0;
       z-index: 100;
     }
+
     .logo-container { display: flex; align-items: center; gap: 10px; }
     .logo-img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 2px solid var(--accent); }
     .logo-text { font-size: 20px; font-weight: 900; color: var(--accent); }
-    .nav-tabs { display: flex; gap: 8px; }
+
+    .nav-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
     .tab-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 8px 14px;
+      padding: 6px 12px;
       border-radius: 8px;
       cursor: pointer;
       font-family: inherit;
       font-weight: 700;
       transition: 0.3s;
+      font-size: 13px;
     }
     .tab-btn.active, .tab-btn:hover { background: var(--accent); border-color: var(--accent); }
-    .container { width: 100%; max-width: 900px; padding: 16px; flex: 1; }
+
+    .container { width: 100%; max-width: 1100px; padding: 16px; flex: 1; }
     .page { display: none; }
     .page.active { display: block; }
+
+    /* شريط معلومات الاستضافة */
     .domain-info-bar {
       background: rgba(255, 106, 0, 0.1);
       border: 1px solid var(--accent);
@@ -323,6 +89,7 @@
       gap: 8px;
     }
     .domain-info-bar a { color: var(--accent); text-decoration: none; font-weight: bold; }
+
     /* بنر ترقية الحساب المباشر */
     .pro-banner {
       background: linear-gradient(135deg, rgba(255, 106, 0, 0.15), rgba(235, 0, 41, 0.15));
@@ -340,19 +107,20 @@
       background: linear-gradient(45deg, var(--accent), var(--tron));
       color: #fff;
       border: none;
-      padding: 12px 20px;
+      padding: 10px 18px;
       border-radius: 10px;
       font-weight: 900;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       box-shadow: 0 4px 15px var(--accent-glow);
       transition: 0.3s;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .btn-pay-pro:hover { transform: translateY(-2px); scale: 1.02; }
-    /* قسم شبكة الإعلانات والرصيد البرمجي */
+
+    /* لوحة شبكة الإعلانات */
     .ads-network-card {
       background: rgba(13, 20, 30, 0.9);
       border: 1px solid var(--accent);
@@ -365,7 +133,7 @@
     .ads-status-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 8px var(--success); }
     .ads-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; text-align: center; }
     .ad-net-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 8px; border-radius: 8px; font-size: 11px; }
-    /* حاويات الإعلانات المدمجة داخل التطبيق */
+
     .ad-banner-slot {
       background: rgba(0, 0, 0, 0.4);
       border: 1px dashed var(--border);
@@ -379,6 +147,7 @@
       margin: 16px 0;
       text-align: center;
     }
+
     /* قسم البطولات 200+ */
     .tournaments-card {
       background: var(--card-bg);
@@ -390,107 +159,87 @@
     .tourn-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
     .tourn-title { font-size: 15px; font-weight: 900; color: var(--accent); }
     .year-filter { background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-family: inherit; font-size: 12px; outline: none; }
-    .tourn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; max-height: 200px; overflow-y: auto; padding-left: 4px; }
+    .tourn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto; padding-left: 4px; }
     .tourn-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
     .tourn-year { background: var(--accent); color: #fff; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
+
+    /* الأرشيف */
+    .archive-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
+    .archive-item { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 12px; }
+    .archive-badge { background: rgba(0, 230, 118, 0.2); color: var(--success); font-size: 10px; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 6px; }
+
+    /* شبكة الـ QR */
+    .controls-bar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .search-input { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 10px 14px; border-radius: 8px; color: #fff; flex: 1; min-width: 200px; font-family: inherit; }
+    .qr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
+    .qr-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; display: flex; flex-direction: column; align-items: center; transition: 0.3s; }
+    .qr-card:hover { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
+    .qr-title { font-size: 13px; font-weight: bold; color: var(--accent); margin-bottom: 4px; }
+    .qr-url { font-size: 9px; color: var(--dim); word-break: break-all; margin-bottom: 10px; height: 24px; overflow: hidden; }
+    .qr-box-wrapper { position: relative; padding: 8px; background: #fff; border-radius: 10px; border: 2px solid var(--accent); width: 150px; height: 150px; display: flex; align-items: center; justify-content: center; }
+    .qr-logo-overlay { position: absolute; width: 30px; height: 30px; background: #000; border: 2px solid var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 900; font-size: 10px; z-index: 10; }
+
     /* النافذة المنبثقة للدفع */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 16px;
-    }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 16px; }
     .modal-overlay.active { display: flex; }
-    .modal-card {
-      background: var(--card-bg);
-      border: 1px solid var(--accent);
-      border-radius: 16px;
-      padding: 24px;
-      max-width: 450px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-    }
+    .modal-card { background: var(--card-bg); border: 1px solid var(--accent); border-radius: 16px; padding: 24px; max-width: 450px; width: 100%; text-align: center; position: relative; }
     .close-modal { position: absolute; top: 12px; left: 16px; font-size: 20px; cursor: pointer; color: var(--dim); }
     .wallet-addr-box { background: rgba(0,0,0,0.4); border: 1px dashed var(--border); padding: 10px; border-radius: 8px; font-size: 11px; word-break: break-all; margin: 12px 0; color: var(--dim); }
-    /* الواجهات */
-    .login-wrapper {
-      min-height: 50vh;
-      background: linear-gradient(rgba(11, 14, 20, 0.75), rgba(11, 14, 20, 0.9)), 
-                  url('https://images.unsplash.com/photo-1508098682722...') center/cover no-repeat;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      border: 1px solid var(--border);
-    }
-    .login-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      padding: 32px;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      border: 1px solid var(--border);
-    }
-    .login-card input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: #fff;
-      font-family: inherit;
-    }
-    .match-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+
+    /* الواجهات المختلفة */
+    .login-wrapper { min-height: 50vh; background: linear-gradient(rgba(11, 14, 20, 0.75), rgba(11, 14, 20, 0.9)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; border-radius: 16px; display: flex; align-items: center; justify-content: center; padding: 20px; border: 1px solid var(--border); }
+    .login-card { background: var(--card-bg); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; width: 100%; max-width: 400px; text-align: center; border: 1px solid var(--border); }
+    .login-card input { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--border); border-radius: 8px; color: #fff; font-family: inherit; }
+
+    .match-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
     .team { display: flex; align-items: center; gap: 10px; flex: 1; }
     .team.right { justify-content: flex-end; }
-    .team-flag { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+    .team-flag { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); }
     .match-vs { text-align: center; font-weight: 900; color: var(--accent); }
+
     .profile-card { background: var(--card-bg); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
-    .profile-banner { height: 180px; background: url('https://images.unsplash.com/photo-1574629810360...') center/cover no-repeat; }
+    .profile-banner { height: 180px; background: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; }
     .profile-info { padding: 20px; text-align: center; }
     .profile-avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); margin-top: -75px; background: var(--bg); }
     .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
     .stat-box { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; border: 1px solid var(--border); }
+
+    /* مشغل الفيديو المنبثق */
+    .video-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 16px; }
+    .video-modal-overlay.active { display: flex; }
+    .video-modal-card { background: var(--card-bg); border: 1px solid var(--accent); border-radius: 16px; padding: 16px; max-width: 700px; width: 100%; position: relative; text-align: center; }
+    .close-video-modal { position: absolute; top: 8px; left: 14px; font-size: 24px; cursor: pointer; color: var(--dim); }
+    .video-player-container { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; overflow: hidden; margin: 12px 0; }
+    .video-player-container iframe { width: 100%; height: 100%; border: none; }
   </style>
 </head>
 <body>
+
+  <!-- شريط التنقل -->
   <nav>
     <div class="logo-container">
-      <img src="https://images.unsplash.com/photo-1614632537190..." class="logo-img" alt="شعار GoalPro">
+      <img src="https://images.unsplash.com/photo-1614632537190-23e4146777db?auto=format&fit=crop&w=100&q=80" class="logo-img" alt="شعار GoalPro">
       <span class="logo-text">GoalPro</span>
     </div>
     <div class="nav-tabs">
-      <button class="tab-btn active" onclick="showPage('login', this)">الدخول</button>
-      <button class="tab-btn" onclick="showPage('matches', this)">المباريات</button>
-      <button class="tab-btn" onclick="showPage('profile', this)">البروفايل</button>
+      <button class="tab-btn active" onclick="showPage('login', this)">🔑 الدخول</button>
+      <button class="tab-btn" onclick="showPage('matches', this)">⚽ المباريات</button>
+      <button class="tab-btn" onclick="showPage('archive', this)">📜 الأرشيف</button>
+      <button class="tab-btn" onclick="showPage('qr-section', this)">📱 أكواد QR (641)</button>
+      <button class="tab-btn" onclick="showPage('profile', this)">👤 البروفايل</button>
     </div>
   </nav>
+
   <div class="container">
-    <!-- معلومات المضيف والدومين -->
+    
+    <!-- معلومات الاستضافة والدومين -->
     <div class="domain-info-bar">
       <span>🌐 الموقع: <a href="https://sweet-belekoy-67b692.netlify.app" target="_blank">sweet-belekoy-67b692.netlify.app</a></span>
       <span>⚡ الدومين: <a href="https://1287.workers.dev" target="_blank">1287.workers.dev</a></span>
     </div>
-    <!-- لوحة شبكة الإعلانات المربوطة برمجياً -->
+
+    <!-- شبكة الإعلانات البرمجية -->
     <div class="ads-network-card">
       <div class="ads-header">
         <div class="ads-title">
@@ -500,25 +249,14 @@
         <span style="font-size: 11px; color: var(--dim);">متصل 100%</span>
       </div>
       <div class="ads-grid">
-        <div class="ad-net-item">
-          <strong style="color:#fff;">Google AdMob</strong>
-          <div style="color:var(--success); font-size:10px;">CPM: $28</div>
-        </div>
-        <div class="ad-net-item">
-          <strong style="color:#fff;">Meta Ads</strong>
-          <div style="color:var(--success); font-size:10px;">CPM: $15</div>
-        </div>
-        <div class="ad-net-item">
-          <strong style="color:#fff;">Amazon Ads</strong>
-          <div style="color:var(--success); font-size:10px;">CPM: $18</div>
-        </div>
-        <div class="ad-net-item">
-          <strong style="color:#fff;">TikTok Ads</strong>
-          <div style="color:var(--success); font-size:10px;">CPM: $12</div>
-        </div>
+        <div class="ad-net-item"><strong style="color:#fff;">Google AdMob</strong><div style="color:var(--success); font-size:10px;">CPM: $28</div></div>
+        <div class="ad-net-item"><strong style="color:#fff;">Meta Ads</strong><div style="color:var(--success); font-size:10px;">CPM: $15</div></div>
+        <div class="ad-net-item"><strong style="color:#fff;">Amazon Ads</strong><div style="color:var(--success); font-size:10px;">CPM: $18</div></div>
+        <div class="ad-net-item"><strong style="color:#fff;">TikTok Ads</strong><div style="color:var(--success); font-size:10px;">CPM: $12</div></div>
       </div>
     </div>
-    <!-- بنر ترقية الحساب -->
+
+    <!-- بنر ترقية الحساب المباشر -->
     <div class="pro-banner">
       <div>
         <strong style="font-size: 16px; color: #fff;">🏆 ترقية الحساب إلى GoalPro VIP</strong>
@@ -526,7 +264,8 @@
       </div>
       <button class="btn-pay-pro" onclick="openPaymentModal()">💎 ادفع اشتراك Pro بـ USDT (50$)</button>
     </div>
-    <!-- قسم الأرشيف للبطولات (+200 بطولة) -->
+
+    <!-- قسم البطولات (+200 بطولة) -->
     <div class="tournaments-card">
       <div class="tourn-header">
         <div class="tourn-title">⚽ تغطية +200 بطولة من 2026 لـ 2034</div>
@@ -539,18 +278,14 @@
       </div>
       <div class="tourn-grid" id="tournamentsGrid"></div>
     </div>
-    <!-- مساحة إعلانية برمجية 1 -->
-    <div class="ad-banner-slot" id="adSlotHeader">
-      <!-- هنا يتم تحميل إعلان AdSense/AdMob برمجياً -->
-      <ins class="adsbygoogle"
-           style="display:block; width:100%; height:90px;"
-           data-ad-client="ca-pub-0000000000000000"
-           data-ad-slot="1234567890"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
+
+    <!-- مساحة إعلانية برمجية -->
+    <div class="ad-banner-slot">
+      <ins class="adsbygoogle" style="display:block; width:100%; height:90px;" data-ad-client="ca-pub-0000000000000000" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
       <span id="fallbackAdText">📣 إعلان تلقائي (Google AdMob / Meta Network)</span>
     </div>
-    <!-- واجهة تسجيل الدخول -->
+
+    <!-- 1. واجهة تسجيل الدخول -->
     <div id="login" class="page active">
       <div class="login-wrapper">
         <div class="login-card">
@@ -562,31 +297,41 @@
         </div>
       </div>
     </div>
-    <!-- صفحة المباريات -->
+
+    <!-- 2. صفحة المباريات -->
     <div id="matches" class="page">
-      <h3 style="margin-bottom: 16px; color: var(--accent);">⚽ مباريات World Cup 2026 & UCL المباشرة</h3>
-      <div class="match-card">
-        <div class="team">
-          <img src="https://images.unsplash.com/photo-1522778119026..." class="team-flag" alt="ريال مدريد">
-          <span>ريال مدريد (UCL)</span>
-        </div>
-        <div class="match-vs">2 - 1<br><span style="font-size: 10px; color: var(--dim);">مباشر</span></div>
-        <div class="team right">
-          <span>مانشستر سيتي</span>
-          <img src="https://images.unsplash.com/photo-1508098682722..." class="team-flag" alt="مانشستر سيتي">
-        </div>
-      </div>
-      <!-- مساحة إعلانية مدمجة بين المباريات -->
-      <div class="ad-banner-slot">
-        📢 إعلان رعاية مسجل من خلال الربط البرمجي التلقائي
+      <h3 style="margin-bottom: 16px; color: var(--accent);">⚽ مباريات اليوم المباشرة</h3>
+      <div id="activeMatchesContainer"></div>
+    </div>
+
+    <!-- 3. صفحة الأرشيف -->
+    <div id="archive" class="page">
+      <div class="archive-card">
+        <h3 style="color: var(--gold); margin-bottom: 8px;">🏛️ أرشيف المباريات والبطولات التاريخية</h3>
+        <p style="font-size: 12px; color: var(--dim);">تؤرشف المباريات تلقائياً بعد مرور 30 يوماً على لعبها.</p>
+        <div class="archive-grid" id="archivedMatchesContainer"></div>
       </div>
     </div>
-    <!-- صفحة البروفايل -->
+
+    <!-- 4. محرك الـ QR (641) -->
+    <div id="qr-section" class="page">
+      <div class="controls-bar">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم محلل أو لغة..." oninput="filterQRCodes()">
+        <div style="display: flex; gap: 6px;">
+          <button class="tab-btn active" id="btn-qr-analysts" onclick="switchCategory('analysts')">🎙️ المحللون (500)</button>
+          <button class="tab-btn" id="btn-qr-languages" onclick="switchCategory('languages')">🌐 اللغات (141)</button>
+          <button class="tab-btn" id="btn-qr-app" onclick="switchCategory('app')">📲 التطبيق الرئيسي</button>
+        </div>
+      </div>
+      <div class="qr-grid" id="qrContainer"></div>
+    </div>
+
+    <!-- 5. صفحة البروفايل -->
     <div id="profile" class="page">
       <div class="profile-card">
         <div class="profile-banner"></div>
         <div class="profile-info">
-          <img src="https://images.unsplash.com/photo-1511886929837..." class="profile-avatar" alt="اللاعب">
+          <img src="https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=400&q=80" class="profile-avatar" alt="اللاعب">
           <h2>أحمد التكتيكي</h2>
           <p style="color: var(--accent); font-size: 13px;">عضوية مجانية</p>
           <button class="btn-pay-pro" style="margin: 15px auto; justify-content: center;" onclick="openPaymentModal()">⚡ ترقية الحساب - ادفع اشتراك Pro بـ USDT</button>
@@ -598,8 +343,10 @@
         </div>
       </div>
     </div>
+
   </div>
-  <!-- النافذة المنبثقة للدفع البرمجي بـ USDT -->
+
+  <!-- النافذة المنبثقة للدفع USDT -->
   <div class="modal-overlay" id="paymentModal">
     <div class="modal-card">
       <span class="close-modal" onclick="closePaymentModal()">✕</span>
@@ -616,18 +363,37 @@
       <a id="trustWalletLink" href="#" class="btn-pay-pro" style="background: var(--trust); width:100%; justify-content:center; text-decoration:none;" onclick="openTrustWallet(event)">📱 تحويل مباشر عبر Trust Wallet</a>
     </div>
   </div>
+
+  <!-- نافذة مشاهدة الفيديو -->
+  <div class="video-modal-overlay" id="videoModal">
+    <div class="video-modal-card">
+      <span class="close-video-modal" onclick="closeVideoPlayer()">✕</span>
+      <h3 style="color: var(--accent); font-size: 16px;" id="videoPlayerTitle">مشاهدة المباراة</h3>
+      <div class="video-player-container">
+        <iframe id="videoIframe" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
   <script>
     const RECEIVER_WALLET = "THYnJNJ5K49Hk5iACQvSXfgkyj5cLGceoq";
     const USDT_CONTRACT = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
-    const PRIMARY_SITE = "https://sweet-belekoy-67b692.netlify.app";
-    const WORKER_DOMAIN = "https://1287.workers.dev";
+    const BASE_DOMAIN = "https://goalpro-iraq.pages.dev";
+
+    // 1. قاعدة بيانات المباريات
+    const matchesDatabase = [
+      { id: 1, teamA: "ريال مدريد", teamB: "برشلونة", score: "2 - 1", date: "2026-09-01", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1", logoA: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=100&q=80", logoB: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=100&q=80" },
+      { id: 2, teamA: "البرازيل", teamB: "إيطاليا (1970)", score: "4 - 1", date: "1970-06-21", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1", logoA: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=100&q=80", logoB: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=100&q=80" }
+    ];
+
+    // 2. محرك إنشاء البطولات (+200 بطولة)
+    const tournamentBaseNames = ["كأس العالم FIFA", "دوري أبطال أوروبا (UCL)", "كأس الأمم الأفريقية", "كأس آسيا", "كوبا أمريكا", "دوري أمم أوروبا", "كأس العالم للأندية", "الدوري الإنجليزي الممتاز", "الدوري الإسباني LaLiga", "الدوري الإيطالي Serie A", "الدوري الألماني Bundesliga", "الدوري الفرنسي Ligue 1", "دوري أبطال آسيا للنخبة", "دوري أبطال أفريقيا", "الدوري السعودي للمحترفين", "كأس الخليج العربي", "الألعاب الأولمبية الصيفية", "كأس السوبر الأوروبي", "الدوري الأوروبي UEL", "دوري المؤتمر الأوروبي", "كأس ملك إسبانيا", "كأس الاتحاد الإنجليزي", "كأس السوبر السعودي"];
     const generatedTournaments = [];
     let idCounter = 1;
     for (let year = 2026; year <= 2034; year++) {
-      tournamentBaseNames.forEach(name => {
-        generatedTournaments.push({ id: idCounter++, name: `${name} ${year}`, year: year });
-      });
+      tournamentBaseNames.forEach(name => { generatedTournaments.push({ id: idCounter++, name: `${name} ${year}`, year: year }); });
     }
+
     function renderTournaments(filterYear = "all") {
       const grid = document.getElementById('tournamentsGrid');
       grid.innerHTML = '';
@@ -640,25 +406,99 @@
       });
     }
     function filterTournaments(year) { renderTournaments(year); }
+
+    // 3. قوائم محرك الـ QR (141 لغة + 500 محلل)
+    const languagesList = [{ code: 'ar', name: 'العربية' }, { code: 'ku', name: 'الكردية (Kurdî)' }, { code: 'en', name: 'إنجليزية (English)' }, { code: 'es', name: 'إسبانية (Español)' }, { code: 'fr', name: 'فرنسية (Français)' }, { code: 'de', name: 'ألمانية (Deutsch)' }];
+    for(let i = 7; i <= 141; i++) { languagesList.push({ code: `lang-${i}`, name: `لغة عالمية ${i}` }); }
+
+    const analystsList = [{ id: 'ahmed-iraqi', name: 'أحمد العراقي' }, { id: 'ali-alnoaimi', name: 'علي النعيمي' }];
+    for(let i = 3; i <= 500; i++) { analystsList.push({ id: `analyst-${i}`, name: `المحلل الرياضي ${i}` }); }
+
+    let currentQRCategory = 'analysts';
+
     function showPage(pageId, btn) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
       if(btn) btn.classList.add('active');
+      if(pageId === 'qr-section') switchCategory(currentQRCategory);
     }
+
+    // 4. معالجة الأرشيف التلقائي
+    function processAutoArchive() {
+      const activeContainer = document.getElementById('activeMatchesContainer');
+      const archiveContainer = document.getElementById('archivedMatchesContainer');
+      activeContainer.innerHTML = ''; archiveContainer.innerHTML = '';
+      const currentDate = new Date();
+
+      matchesDatabase.forEach(match => {
+        const isArchived = (currentDate - new Date(match.date)) >= (30 * 24 * 60 * 60 * 1000);
+        if (isArchived) {
+          archiveContainer.innerHTML += `
+            <div class="archive-item">
+              <span class="archive-badge">مؤرشف تلقائياً</span><br>
+              <strong style="color:var(--gold);">${match.teamA} ${match.score} ${match.teamB}</strong>
+              <div style="font-size:10px; color:var(--dim); margin:4px 0;">التاريخ: ${match.date}</div>
+              <button class="btn-pay-pro" style="padding:4px 8px; font-size:10px;" onclick="openVideoPlayer('${match.teamA} ضد ${match.teamB}', '${match.videoUrl}')">▶ مشاهدة</button>
+            </div>`;
+        } else {
+          activeContainer.innerHTML += `
+            <div class="match-card">
+              <div class="team"><img src="${match.logoA}" class="team-flag"> <span>${match.teamA}</span></div>
+              <div class="match-vs">${match.score}<br><button class="btn-pay-pro" style="padding:4px 8px; font-size:10px; margin-top:4px;" onclick="openVideoPlayer('${match.teamA} ضد ${match.teamB}', '${match.videoUrl}')">▶ مباشر</button></div>
+              <div class="team right"><span>${match.teamB}</span> <img src="${match.logoB}" class="team-flag"></div>
+            </div>`;
+        }
+      });
+    }
+
+    // 5. توليد الـ QR
+    function renderQRCodes(dataList, type) {
+      const container = document.getElementById('qrContainer');
+      container.innerHTML = '';
+      dataList.forEach((item, index) => {
+        let targetUrl = `${BASE_DOMAIN}`;
+        let title = `📲 تطبيق GoalPro الرسمي`;
+        if(type === 'analysts') { targetUrl = `${BASE_DOMAIN}/analyst/${item.id}`; title = `🎙️ ${item.name}`; }
+        else if(type === 'languages') { targetUrl = `${BASE_DOMAIN}/lang/${item.code}`; title = `🌐 ${item.name}`; }
+
+        const card = document.createElement('div');
+        card.className = 'qr-card';
+        const qrBoxId = `qr-box-${type}-${index}`;
+        card.innerHTML = `
+          <div class="qr-title">${title}</div>
+          <div class="qr-url">${targetUrl}</div>
+          <div class="qr-box-wrapper"><div id="${qrBoxId}"></div><div class="qr-logo-overlay">GP</div></div>`;
+        container.appendChild(card);
+
+        new QRCode(document.getElementById(qrBoxId), {
+          text: targetUrl, width: 134, height: 134, colorDark: "#ff6a00", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H
+        });
+      });
+    }
+
+    function switchCategory(category) {
+      currentQRCategory = category;
+      if(category === 'analysts') renderQRCodes(analystsList, 'analysts');
+      else if(category === 'languages') renderQRCodes(languagesList, 'languages');
+      else renderQRCodes([{ id: 'main', name: 'الرئيسي' }], 'app');
+    }
+
+    function filterQRCodes() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      if(currentQRCategory === 'analysts') renderQRCodes(analystsList.filter(a => a.name.toLowerCase().includes(query) || a.id.includes(query)), 'analysts');
+      else if(currentQRCategory === 'languages') renderQRCodes(languagesList.filter(l => l.name.toLowerCase().includes(query) || l.code.includes(query)), 'languages');
+    }
+
+    // 6. وظائف الدفع والنافذة المنبثقة
     function openPaymentModal() {
       document.getElementById('paymentModal').classList.add('active');
       document.getElementById('qrcode').innerHTML = "";
-      new QRCode(document.getElementById("qrcode"), {
-        text: `tron:${RECEIVER_WALLET}`,
-        width: 130, height: 130,
-        colorDark : "#ff6a00", colorLight : "#ffffff"
-      });
+      new QRCode(document.getElementById("qrcode"), { text: `tron:${RECEIVER_WALLET}`, width: 130, height: 130, colorDark : "#ff6a00", colorLight : "#ffffff" });
       document.getElementById('trustWalletLink').href = `https://link.trustwallet.com/open_url?coin_id=195&address=${RECEIVER_WALLET}`;
     }
-    function closePaymentModal() {
-      document.getElementById('paymentModal').classList.remove('active');
-    }
+    function closePaymentModal() { document.getElementById('paymentModal').classList.remove('active'); }
+
     async function executeUSDTTransaction() {
       if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
         try {
@@ -669,27 +509,31 @@
         } catch (e) { copyWallet(); }
       } else { copyWallet(); }
     }
+
     function copyWallet() {
       navigator.clipboard.writeText(RECEIVER_WALLET);
       alert("تم نسخ عنوان المحفظة للتحويل المباشر:\n" + RECEIVER_WALLET);
     }
+
     function openTrustWallet(e) {
-      if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-        e.preventDefault(); copyWallet();
-      }
+      if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) { e.preventDefault(); copyWallet(); }
     }
-    // الربط التلقائي بمحركات الإعلانات
-    function initAdNetworks() {
-      try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {
-        console.log("AdSense Unit Loaded via API");
-      }
+
+    function openVideoPlayer(title, streamUrl) {
+      document.getElementById('videoPlayerTitle').innerText = title;
+      document.getElementById('videoIframe').src = streamUrl;
+      document.getElementById('videoModal').classList.add('active');
     }
+    function closeVideoPlayer() {
+      document.getElementById('videoIframe').src = '';
+      document.getElementById('videoModal').classList.remove('active');
+    }
+
     window.onload = () => {
       renderTournaments();
-      initAdNetworks();
+      processAutoArchive();
+      try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
     };
   </script>
 </body>
-</html> 
+</html>
