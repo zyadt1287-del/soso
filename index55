@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOALPRO Orange v3.0 - 190 دوري</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#FF6B00;color:white}
+.header{background:#000;padding:20px;text-align:center}
+.header h1{color:#FF6B00;font-size:28px}
+.nav{background:#111;padding:15px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:10px}
+.nav button{background:#FF6B00;color:white;border:none;padding:10px 20px;border-radius:20px;cursor:pointer}
+.container{padding:20px}
+.card{background:white;color:#333;padding:15px;margin:10px 0;border-radius:12px}
+.league{padding:10px;border-bottom:1px solid #eee}
+.badge{background:#FF6B00;color:white;padding:2px 8px;border-radius:10px;font-size:12px}
+.secret{background:#000;color:#0f0;padding:10px;margin:10px 0;border-radius:8px;font-family:monospace}
+.lang-btn{position:fixed;top:20px;left:20px;background:white;color:#FF6B00;width:50px;height:50px;border-radius:50%;border:none;font-size:24px;cursor:pointer;z-index:1000}
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="changeLang()">🌐</button>
+<div class="header">
+<h1>GOALPRO Orange v3.0</h1>
+<p>190 دوري - 211 لغة - 5$ / 3$ / 1$ - دولار 1540 سري</p>
+</div>
+<div class="nav">
+<button onclick="show('leagues')">190 دوري</button>
+<button onclick="show('tournaments')">البطولات</button>
+<but 
